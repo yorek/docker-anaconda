@@ -15,6 +15,9 @@ RUN chmod +x Miniconda3-latest-Linux-x86_64.sh
 # Install Anaconda
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b
 
+# Remove Instalation file
+RUN rm Miniconda3-latest-Linux-x86_64.sh
+
 # Add Anaconda to the Path
 ENV PATH /root/miniconda3/bin:$PATH 
 
