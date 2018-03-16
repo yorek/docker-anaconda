@@ -1,0 +1,17 @@
+FROM microsoft/windowsservercore:1709
+
+WORKDIR /tmp
+
+RUN powershell (New-Object System.Net.WebClient).DownloadFile('https://repo.continuum.io/archive/Anaconda3-5.1.0-Windows-x86_64.exe', 'Anaconda3.exe')
+
+RUN powershell Unblock-File Anaconda3.exe
+
+RUN Anaconda3.exe /InstallationType=JustMe /RegisterPython=1 /S /D=%UserProfile%\Anaconda3
+
+RUN del Anaconda3.exe
+
+WORKDIR /
+
+RUN setx /M PATH "%PATH%;%UserProfile%\Anaconda3;%UserProfile%\Anaconda3\Scripts;%UserProfile%\Anaconda3\Library\bin"
+
+CMD ["ipython"]
